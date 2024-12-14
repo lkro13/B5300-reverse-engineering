@@ -6,6 +6,8 @@ Any and all contribution is welcomed and encouraged!
 
 > **[Notice]** Unforunately, I can't upload any decompiled firmware here (sorry!). However, the process to unpack the .bin yourself is trivial by following [these instructions](docs/2-unpacking-firmware.md).
 
+There's a UART TX pad on the board, this outputs UART at 500k baud. Log from boot in logs folder.
+
 ## Tutorials
 
 - [1. How-To: Extract your firmware](docs/1-extracting-firmware.md)
