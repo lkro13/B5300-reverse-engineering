@@ -23,4 +23,4 @@ echo "Detaching $DISKNAME"
 hdiutil detach "$DISKNAME"
 
 echo "Embedding GPT image to $2"
-dd if="$3/gpt.img" of="$1" bs=1024 seek=48 status=progress conv=notrunc
+dd if="$3/gpt.img" of="$2" bs=1024 seek=48 status=progress conv=notrunc
