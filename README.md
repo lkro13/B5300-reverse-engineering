@@ -8,6 +8,10 @@ Any and all contribution is welcomed and encouraged!
 
 There's a UART TX pad on the board, this outputs UART at 500k baud. Log from boot in logs folder.
 
+# WIP
+
+I have modified the script and recompiled the tool to run on linux, i haven't upload the files yet but i will do so later.
+
 ## Tutorials
 
 - [1. How-To: Extract your firmware](docs/1-extracting-firmware.md)
