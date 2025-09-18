@@ -10,8 +10,8 @@ First place a copy of the unmodified, original `firmware.bin` in the `workspace`
 
 Next, run the `repack.sh` script, specifying the output file name and source directory containing your .img files and minfs filesystem like so:
 ```bash
-# ./repack.sh [path/to/original/firmware.bin] [output.bin] [path/to/source/]
-➜  ~ ./repack.sh firmware.bin output.bin extracted/
+./repack.sh [path/to/original/firmware.bin] [output.bin] [path/to/source/]
+./repack.sh firmware.bin output.bin extracted/
 ```
 Expected output:
 ```
@@ -55,6 +55,8 @@ Detaching /dev/disk6
 "disk6" ejected.
 Embedding GPT image to output.bin
 ```
+
+> same warning as last time
 
 The script will produce a new `output.bin` file containing your [modified partitions](./2-unpacking-firmware.md#structure-overview). You are now ready to [flash it to your device](./4-flashing-firmware.md).
 

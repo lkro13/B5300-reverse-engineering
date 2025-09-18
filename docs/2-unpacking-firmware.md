@@ -12,22 +12,28 @@ This tutorial explains how to unpack a dumped `firmware.bin` and recover the emb
 ### Setup
 
 I've provided the prebuilt tools for extraction in `firmware/bin`. If you're happy to use these [skip to here](#extraction). However, if you'd prefer to build them yourself, make sure the submodules are initialised and run the makefile:
+
+> Note that on linux you will have to disable a option which i have link [below](#Compiling)
+
 ```bash
 # Clone the repository with its submodules
-➜  ~ git clone --recursive git@github.com:dan-os/b5300-reverse-engineering.git
+git clone --recursive https://github.com/lkro13/B5300-reverse-engineering.git
 
 # Run the makefile in the firmware folder
-➜  ~ cd firmware/
-➜  ~ make clean && make all
+cd firmware/
+make clean && make all
 ```
 
 ### Extraction
 
 Place a copy of your `firmware.bin` in `firmware/workspace`. Next, simply run the extraction script:
+
 ```bash
-➜  ~ ./unpack.sh firmware.bin extracted/
+./unpack.sh firmware.bin extracted/
 ```
+
 Expected output:
+
 ```
 Removing old files
 Creating extracted/ directory
@@ -77,7 +83,12 @@ File number        : [     172]
 ------------------------------------------------------------------
 ```
 
+> note that this output is from the original creator, my version have slight variation on the output
+>
+> Also as Im quite not familiar with linux scripts you have to unmount any loop drive beforehand if you have any mounted
+
 If all goes well, the unpacked contents of the dump will appear in a new `extracted/` folder and should look something like this:
+
 ```bash
 ├── 1.img      # operating system
 ├── fat.img    # user save data
@@ -117,3 +128,31 @@ This partition contains the built MINFS filesystem. This is where the applicatio
 ### `fat.img`
 
 This partition contains device save data such as the active start screen image, current Config.ini file, and various application state data.
+
+### Compiling
+
+To compile minfs_tool you will have to go
+
+```
+firmware/lindenis-v833-RTOS-melis-4.0/source/utility/host-tool/minfs_tool/
+```
+
+and remove the `-fsanitize=address` option in `Makefile`
+
+so from this
+
+```
+cc = gcc -finput-charset=UTF-8 -g -Wall -Wno-implicit-function-declaration -fsanitize=address
+```
+
+to this
+
+```
+cc = gcc -finput-charset=UTF-8 -g -Wall -Wno-implicit-function-declaration
+```
+
+and then back to firmware folder and run the compile command from above
+
+> Note there is a package i think you need to install? but i forgot what package it is so if it show a error, you will have to install that package or post the log in the issue page and i'll add to this docs
+
+during my testing it will run with the following options but it will throw a bunch of memory leak error and cause the script to stop running

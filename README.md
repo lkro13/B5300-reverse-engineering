@@ -8,9 +8,9 @@ Any and all contribution is welcomed and encouraged!
 
 There's a UART TX pad on the board, this outputs UART at 500k baud. Log from boot in logs folder.
 
-# WIP
-
-I have modified the script and recompiled the tool to run on linux, i haven't upload the files yet but i will do so later.
+> I have the P100 (the one with a wide screen carplay) the unpacking instruction works with it as well hences why I have included it as well.
+>
+> Also the original repo contains script that only runs on macos, I have tried my best to get it to run on linux (tested on fedora 42 only tho)
 
 ## Tutorials
 
@@ -19,14 +19,16 @@ I have modified the script and recompiled the tool to run on linux, i haven't up
 - [3. How-To: Repack the filesystem](docs/3-repacking-firmware.md)
 - [4. How-To: Flash modified firmware](docs/4-flashing-firmware.md)
 
+I have read the forums linked below as well and decided to include some [useful info here as well](docs/extras.md). 
+
 ## Factory codes
 
 Factory codes provide access to hidden pages in the Settings menu. Some are useless while others allow you to customise your device, e.g. by modifying the startup image or changing the UI style to your liking etc.
 
 Here's an exhaustive list of factory codes I've found so far:
 
-| Code     | Title               | Notes                            |
-| -------- | ------------------- | -------------------------------- |
+| Code       | Title               | Notes                            |
+| ---------- | ------------------- | -------------------------------- |
 | `001106` | Interface selection | Interface style selection menu   |
 | `112233` | Logo                | Startup image customization menu |
 | `112345` | Debug               | Debugging menu                   |

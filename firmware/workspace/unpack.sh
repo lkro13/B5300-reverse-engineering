@@ -16,20 +16,25 @@ mkdir -p $2
 echo "Extracting GPT image to $2/gpt.img"
 dd if="$1" of="$2/gpt.img" bs=1024 skip=48 status=progress
 
-DISKNAME=`hdiutil attach "$2/gpt.img" -nomount | grep "GUID_partition_scheme" | cut -d' ' -f1`
+#hey uhm i don't really know linux so you have to change this to the loop device or unmount all loop device first
+loopdisk="loop0"
+DISKNAME="/dev/${loopdisk}"
+mapper="/dev/mapper/${loopdisk}"
+sudo kpartx -av "$2/gpt.img"
 echo "Attached GPT image to $DISKNAME"
 
 echo "Extracting volume 1 to $2/1.img"
-dd if="${DISKNAME}s1" of="$2/1.img" status=progress
+sudo dd if="${mapper}p1" of="$2/1.img" status=progress
 
 echo "Extracting MINFS volume to $2/minfs.img"
-dd if="${DISKNAME}s2" of="$2/minfs.img" status=progress
+sudo dd if="${mapper}p2" of="$2/minfs.img" status=progress
 
 echo "Extracting FAT volume to $2/fat.img"
-dd if="${DISKNAME}s3" of="$2/fat.img" status=progress
+sudo dd if="${mapper}p3" of="$2/fat.img" status=progress
 
 echo "Detaching $DISKNAME"
-hdiutil detach "$DISKNAME"
+sudo kpartx -dv ${DISKNAME}
+sudo losetup -d ${DISKNAME}
 
 echo "Unpacking MINFS to $2/minfs"
 mkdir -p "$2/minfs"

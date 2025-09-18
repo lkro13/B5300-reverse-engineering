@@ -5,12 +5,17 @@ This tutorial explains how to dump the contents of the B5300 flash ROM to a .bin
 ## Prerequisites
 
 #### Hardware
+
 - B5300 head unit (duh)
 - CH341a programmer (or alternative): [link](https://www.aliexpress.us/w/wholesale-CH341a-programmer.html)
 - SOIC8 programming clip (or probes): [clip](https://www.aliexpress.us/w/wholesale-SOIC8-clip.html), [probes](https://www.aliexpress.us/w/wholesale-test-hook-probes.html)
 
 #### Software
-- [flashrom](https://www.flashrom.org/) (or alternative): `brew install flashrom`
+
+[flashrom](https://www.flashrom.org/) (or alternative): 
+
+- `sudo dnf install flashrom`
+- `sudo apt-get install flashrom`
 
 ## Instructions
 
@@ -23,11 +28,13 @@ Attach the SOIC clip (or probes) to the chip, ensuring that pin 1 of the clip (r
 Attach the clip cable (or probes) to the programmer on the BIOS 25 SPI port ensuring that the orientation is correct (see image).
 
 Dump the contents of the ROM using flashrom:
+
 ```bash
-➜  ~ sudo flashrom --programmer ch341a_spi --read firmware.bin
+sudo flashrom --programmer ch341a_spi --read firmware.bin
 ```
 
 Expected output:
+
 ```
 flashrom 1.4.0 on Darwin 23.5.0 (arm64)
 flashrom is free software, get the source code at https://flashrom.org
@@ -52,11 +59,13 @@ You should now have `firmware.bin` file!
 **But wait!** You must first verify that it was saved correctly by comparing the .bin against the contents of the chip once more. For me, it took 3 reads to produce a correct and valid dump. So, be certain yours is valid when you make your backup!
 
 Verify the integrity of the saved .bin using flashrom:
+
 ```bash
-➜  ~ sudo flashrom --programmer ch341a_spi --verify firmware.bin
+sudo flashrom --programmer ch341a_spi --verify firmware.bin
 ```
 
 Expected output:
+
 ```
 flashrom 1.4.0 on Darwin 23.5.0 (arm64)
 flashrom is free software, get the source code at https://flashrom.org
@@ -85,6 +94,7 @@ It's **crucial** to save a backup of the original .bin file so you can restore y
 ## Troubleshooting
 
 ### No device found
+
 ```
 No EEPROM/flash device found.
 Note: flashrom can never write if the flash chip isn't found automatically.
